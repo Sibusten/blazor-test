@@ -18,6 +18,17 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release -o release
 
+      - name: Fix base URL
+        run: sed -i 's/<base href="\/" \/>/<base href="\/blazor-test\/" \/>/g' release/wwwroot/index.html
+
+      # Copy index.html to 404.html to serve the same file when a file is not found
+      - name: copy index.html to 404.html
+        run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+      # Add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
+
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:

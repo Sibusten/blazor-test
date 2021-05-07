@@ -1,0 +1,7 @@
+@using Sibusten.BlazorTest.Models
+
+@inject BrowsingTime _browsingTime
+
+<ViewModelRegion ViewModel="@_browsingTime">
+    You have browsed this website for @_browsingTime.SecondsBrowsed seconds.
+</ViewModelRegion>

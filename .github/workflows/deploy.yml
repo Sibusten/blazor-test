@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: 5.0.101
+
+      - name: Publish
+        run: dotnet publish -c Release -o release
+
+      - name: Upload to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          BRANCH: gh-pages
+          FOLDER: release/wwwroot

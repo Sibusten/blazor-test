@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sibusten.BlazorTest.Models;
 using Sibusten.BlazorTest.Services;
+using Blazored.LocalStorage;
 
 namespace Sibusten.BlazorTest
 {
@@ -20,13 +21,14 @@ namespace Sibusten.BlazorTest
             builder.RootComponents.Add<App>("#app");
 
             builder.Services
-                .AddSingleton<Ticker>()
+                .AddBlazoredLocalStorage()
 
-                .AddSingleton<BrowsingTime>()
-                .AddSingleton<BrowsingTimeCounter>()
+                .AddScoped<Ticker>()
+
+                .AddScoped<BrowsingTime>()
+                .AddScoped<BrowsingTimeCounter>()
 
                 .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-
                 ;
 
             await builder.Build().RunAsync();

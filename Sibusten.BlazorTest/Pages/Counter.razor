@@ -1,14 +1,22 @@
 @page "/counter"
 
-<h1>Counter</h1>
+<Heading Size="HeadingSize.Is1">
+    Counter
+</Heading>
 
-<p>Current count: @currentCount</p>
+<Paragraph>
+    Current count: @currentCount
+</Paragraph>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<Paragraph>
+    <Button Color="Color.Primary" Clicked="@IncrementCount">
+        Click me
+    </Button>
+</Paragraph>
 
-
-<br/><br/>
-<BrowsingTimeDisplay />
+<Paragraph>
+    <BrowsingTimeDisplay />
+</Paragraph>
 
 @code {
     private int currentCount = 0;

@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using Sibusten.BlazorTest.Models;
 using Sibusten.BlazorTest.Services;
 using Blazored.LocalStorage;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 namespace Sibusten.BlazorTest
 {
@@ -21,6 +24,13 @@ namespace Sibusten.BlazorTest
             builder.RootComponents.Add<App>("#app");
 
             builder.Services
+                .AddBlazorise(options =>
+                {
+                    options.ChangeTextOnKeyPress = true;
+                })
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons()
+
                 .AddBlazoredLocalStorage()
 
                 .AddScoped<Ticker>()
